@@ -1,0 +1,768 @@
+@article{HOLLAND2020194431,
+title = {Transfer of regulatory knowledge from human to mouse for functional genomics analysis},
+journal = {Biochimica et Biophysica Acta (BBA) - Gene Regulatory Mechanisms},
+volume = {1863},
+number = {6},
+pages = {194431},
+year = {2020},
+note = {Transcriptional Profiles and Regulatory Gene Networks},
+issn = {1874-9399},
+doi = {10.1016/j.bbagrm.2019.194431},
+url = {https://www.sciencedirect.com/science/article/pii/S1874939919302287},
+author = {Christian H. Holland and Bence Szalai and Julio Saez-Rodriguez},
+keywords = {Functional genomics, Signaling footprints, Pathway activity, Transcription factor activity},
+abstract = {Transcriptome profiling followed by differential gene expression analysis often leads to lists of genes that are hard to analyze and interpret. Functional genomics tools are powerful approaches for downstream analysis, as they summarize the large and noisy gene expression space into a smaller number of biological meaningful features. In particular, methods that estimate the activity of processes by mapping transcripts level to process members are popular. However, footprints of either a pathway or transcription factor (TF) on gene expression show superior performance over mapping-based gene sets. These footprints are largely developed for humans and their usability in the broadly-used model organism Mus musculus is uncertain. Evolutionary conservation of the gene regulatory system suggests that footprints of human pathways and TFs can functionally characterize mice data. In this paper we analyze this hypothesis. We perform a comprehensive benchmark study exploiting two state-of-the-art footprint methods, DoRothEA and an extended version of PROGENy. These methods infer TF and pathway activity, respectively. Our results show that both can recover mouse perturbations, confirming our hypothesis that footprints are conserved between mice and humans. Subsequently, we illustrate the usability of PROGENy and DoRothEA by recovering pathway/TF-disease associations from newly generated disease sets. Additionally, we provide pathway and TF activity scores for a large collection of human and mouse perturbation and disease experiments (2374). We believe that this resource, available for interactive exploration and download (https://saezlab.shinyapps.io/footprint_scores/), can have broad applications including the study of diseases and therapeutics.}
+}
+
+@Article{Schubert2018,
+author={Schubert, Michael
+and Klinger, Bertram
+and Kl{\"u}nemann, Martina
+and Sieber, Anja
+and Uhlitz, Florian
+and Sauer, Sascha
+and Garnett, Mathew J.
+and Bl{\"u}thgen, Nils
+and Saez-Rodriguez, Julio},
+title={Perturbation-response genes reveal signaling footprints in cancer gene expression},
+journal={Nature Communications},
+year={2018},
+month={Jan},
+day={02},
+volume={9},
+number={1},
+pages={20},
+abstract={Aberrant cell signaling can cause cancer and other diseases and is a focal point of drug research. A common approach is to infer signaling activity of pathways from gene expression. However, mapping gene expression to pathway components disregards the effect of post-translational modifications, and downstream signatures represent very specific experimental conditions. Here we present PROGENy, a method that overcomes both limitations by leveraging a large compendium of publicly available perturbation experiments to yield a common core of Pathway RespOnsive GENes. Unlike pathway mapping methods, PROGENy can (i) recover the effect of known driver mutations, (ii) provide or improve strong markers for drug indications, and (iii) distinguish between oncogenic and tumor suppressor pathways for patient survival. Collectively, these results show that PROGENy accurately infers pathway activity from gene expression in a wide range of conditions.},
+issn={2041-1723},
+doi={10.1038/s41467-017-02391-6},
+url={https://doi.org/10.1038/s41467-017-02391-6}
+}
+
+@Article{Finotello2019,
+author={Finotello, Francesca
+and Mayer, Clemens
+and Plattner, Christina
+and Laschober, Gerhard
+and Rieder, Dietmar
+and Hackl, Hubert
+and Krogsdam, Anne
+and Loncova, Zuzana
+and Posch, Wilfried
+and Wilflingseder, Doris
+and Sopper, Sieghart
+and Ijsselsteijn, Marieke
+and Brouwer, Thomas P.
+and Johnson, Douglas
+and Xu, Yaomin
+and Wang, Yu
+and Sanders, Melinda E.
+and Estrada, Monica V.
+and Ericsson-Gonzalez, Paula
+and Charoentong, Pornpimol
+and Balko, Justin
+and de Miranda, Noel Filipe da Cunha Carvalho
+and Trajanoski, Zlatko},
+title={Molecular and pharmacological modulators of the tumor immune contexture revealed by deconvolution of RNA-seq data},
+journal={Genome Medicine},
+year={2019},
+month={May},
+day={24},
+volume={11},
+number={1},
+pages={34},
+abstract={We introduce quanTIseq, a method to quantify the fractions of ten immune cell types from bulk RNA-sequencing data. quanTIseq was extensively validated in blood and tumor samples using simulated, flow cytometry, and immunohistochemistry data.},
+issn={1756-994X},
+doi={10.1186/s13073-019-0638-6},
+url={https://doi.org/10.1186/s13073-019-0638-6}
+}
+
+@article{Garcia-Alonso01082019,
+author = {Garcia-Alonso, Luz and Holland, Christian H. and Ibrahim, Mahmoud M. and Turei, Denes and Saez-Rodriguez, Julio},
+title = {Benchmark and integration of resources for the estimation of human transcription factor activities},
+volume = {29},
+number = {8},
+pages = {1363-1375},
+year = {2019},
+doi = {10.1101/gr.240663.118},
+abstract ={The prediction of transcription factor (TF) activities from the gene expression of their targets (i.e., TF regulon) is becoming a widely used approach to characterize the functional status of transcriptional regulatory circuits. Several strategies and data sets have been proposed to link the target genes likely regulated by a TF, each one providing a different level of evidence. The most established ones are (1) manually curated repositories, (2) interactions derived from ChIP-seq binding data, (3) in silico prediction of TF binding on gene promoters, and (4) reverse-engineered regulons from large gene expression data sets. However, it is not known how these different sources of regulons affect the TF activity estimations and, thereby, downstream analysis and interpretation. Here we compared the accuracy and biases of these strategies to define human TF regulons by means of their ability to predict changes in TF activities in three reference benchmark data sets. We assembled a collection of TF–target interactions for 1541 human TFs and evaluated how different molecular and regulatory properties of the TFs, such as the DNA-binding domain, specificities, or mode of interaction with the chromatin, affect the predictions of TF activity. We assessed their coverage and found little overlap on the regulons derived from each strategy and better performance by literature-curated information followed by ChIP-seq data. We provide an integrated resource of all TF–target interactions derived through these strategies, with confidence scores, as a resource for enhanced prediction of TF activities.},
+URL = {http://genome.cshlp.org/content/29/8/1363.abstract},
+eprint = {http://genome.cshlp.org/content/29/8/1363.full.pdf+html},
+journal = {Genome Research}
+}
+
+@Article{Ramilowski2015,
+author={Ramilowski, Jordan A.
+and Goldberg, Tatyana
+and Harshbarger, Jayson
+and Kloppmann, Edda
+and Lizio, Marina
+and Satagopam, Venkata P.
+and Itoh, Masayoshi
+and Kawaji, Hideya
+and Carninci, Piero
+and Rost, Burkhard
+and Forrest, Alistair R. R.},
+title={A draft network of ligand--receptor-mediated multicellular signalling in human},
+journal={Nature Communications},
+year={2015},
+month={Jul},
+day={22},
+volume={6},
+number={1},
+pages={7866},
+abstract={Cell-to-cell communication across multiple cell types and tissues strictly governs proper functioning of metazoans and extensively relies on interactions between secreted ligands and cell-surface receptors. Herein, we present the first large-scale map of cell-to-cell communication between 144 human primary cell types. We reveal that most cells express tens to hundreds of ligands and receptors to create a highly connected signalling network through multiple ligand--receptor paths. We also observe extensive autocrine signalling with approximately two-thirds of partners possibly interacting on the same cell type. We find that plasma membrane and secreted proteins have the highest cell-type specificity, they are evolutionarily younger than intracellular proteins, and that most receptors had evolved before their ligands. We provide an online tool to interactively query and visualize our networks and demonstrate how this tool can reveal novel cell-to-cell interactions with the prediction that mast cells signal to monoblastic lineages via the CSF1--CSF1R interacting pair.},
+issn={2041-1723},
+doi={10.1038/ncomms8866},
+url={https://doi.org/10.1038/ncomms8866}
+}
+
+@Article{Barretina2012,
+author={Barretina, Jordi
+and Caponigro, Giordano
+and Stransky, Nicolas
+and Venkatesan, Kavitha
+and Margolin, Adam A.
+and Kim, Sungjoon
+and Wilson, Christopher J.
+and Leh{\'a}r, Joseph
+and Kryukov, Gregory V.
+and Sonkin, Dmitriy
+and Reddy, Anupama
+and Liu, Manway
+and Murray, Lauren
+and Berger, Michael F.
+and Monahan, John E.
+and Morais, Paula
+and Meltzer, Jodi
+and Korejwa, Adam
+and Jan{\'e}-Valbuena, Judit
+and Mapa, Felipa A.
+and Thibault, Joseph
+and Bric-Furlong, Eva
+and Raman, Pichai
+and Shipway, Aaron
+and Engels, Ingo H.
+and Cheng, Jill
+and Yu, Guoying K.
+and Yu, Jianjun
+and Aspesi, Peter
+and de Silva, Melanie
+and Jagtap, Kalpana
+and Jones, Michael D.
+and Wang, Li
+and Hatton, Charles
+and Palescandolo, Emanuele
+and Gupta, Supriya
+and Mahan, Scott
+and Sougnez, Carrie
+and Onofrio, Robert C.
+and Liefeld, Ted
+and MacConaill, Laura
+and Winckler, Wendy
+and Reich, Michael
+and Li, Nanxin
+and Mesirov, Jill P.
+and Gabriel, Stacey B.
+and Getz, Gad
+and Ardlie, Kristin
+and Chan, Vivien
+and Myer, Vic E.
+and Weber, Barbara L.
+and Porter, Jeff
+and Warmuth, Markus
+and Finan, Peter
+and Harris, Jennifer L.
+and Meyerson, Matthew
+and Golub, Todd R.
+and Morrissey, Michael P.
+and Sellers, William R.
+and Schlegel, Robert
+and Garraway, Levi A.},
+title={The Cancer Cell Line Encyclopedia enables predictive modelling of anticancer drug sensitivity},
+journal={Nature},
+year={2012},
+month={Mar},
+day={01},
+volume={483},
+number={7391},
+pages={603-607},
+abstract={The Cancer Cell Line Encyclopedia presents the first results from a large-scale screen of some 947 cancer cell lines with 24 anticancer drugs, with the aim of identifying specific genomic alterations and gene expression profiles associated with selective sensitivity or resistance to potential therapeutic agents.},
+issn={1476-4687},
+doi={10.1038/nature11003},
+url={https://doi.org/10.1038/nature11003}
+}
+
+@article{LAPUENTESANTANA2021100293,
+title = {Interpretable systems biomarkers predict response to immune-checkpoint inhibitors},
+journal = {Patterns},
+pages = {100293},
+year = {2021},
+issn = {2666-3899},
+doi = {10.1016/j.patter.2021.100293},
+url = {https://www.sciencedirect.com/science/article/pii/S2666389921001264},
+author = {Óscar Lapuente-Santana and Maisa {van Genderen} and Peter A.J. Hilbers and Francesca Finotello and Federica Eduati},
+keywords = {systems biology, immuno-oncology, biomarkers, machine learning, tumor microenvironment, RNA-seq, precision oncology},
+abstract = {Summary
+Cancer cells can leverage several cell-intrinsic and -extrinsic mechanisms to escape immune system recognition. The inherent complexity of the tumor microenvironment, with its multicellular and dynamic nature, poses great challenges for the extraction of biomarkers of immune response and immunotherapy efficacy. Here, we use RNA-sequencing (RNA-seq) data combined with different sources of prior knowledge to derive system-based signatures of the tumor microenvironment, quantifying immune-cell composition and intra- and intercellular communications. We applied multi-task learning to these signatures to predict different hallmarks of immune responses and derive cancer-type-specific models based on interpretable systems biomarkers. By applying our models to independent RNA-seq data from cancer patients treated with PD-1/PD-L1 inhibitors, we demonstrated that our method to Estimate Systems Immune Response (EaSIeR) accurately predicts therapeutic outcome. We anticipate that EaSIeR will be a valuable tool to provide a holistic description of immune responses in complex and dynamic systems such as tumors using available RNA-seq data.}
+}
+
+@article{ROONEY201548,
+title = {Molecular and Genetic Properties of Tumors Associated with Local Immune Cytolytic Activity},
+journal = {Cell},
+volume = {160},
+number = {1},
+pages = {48-61},
+year = {2015},
+issn = {0092-8674},
+doi = {10.1016/j.cell.2014.12.033},
+url = {https://www.sciencedirect.com/science/article/pii/S0092867414016390},
+author = {Michael S. Rooney and Sachet A. Shukla and Catherine J. Wu and Gad Getz and Nir Hacohen},
+abstract = {Summary
+How the genomic landscape of a tumor shapes and is shaped by anti-tumor immunity has not been systematically explored. Using large-scale genomic data sets of solid tissue tumor biopsies, we quantified the cytolytic activity of the local immune infiltrate and identified associated properties across 18 tumor types. The number of predicted MHC Class I-associated neoantigens was correlated with cytolytic activity and was lower than expected in colorectal and other tumors, suggesting immune-mediated elimination. We identified recurrently mutated genes that showed positive association with cytolytic activity, including beta-2-microglobulin (B2M), HLA-A, -B and -C and Caspase 8 (CASP8), highlighting loss of antigen presentation and blockade of extrinsic apoptosis as key strategies of resistance to cytolytic activity. Genetic amplifications were also associated with high cytolytic activity, including immunosuppressive factors such as PDL1/2 and ALOX12B/15B. Our genetic findings thus provide evidence for immunoediting in tumors and uncover mechanisms of tumor-intrinsic resistance to cytolytic activity.}
+}
+
+@article {Roheaah3560,
+	author = {Roh, Whijae and Chen, Pei-Ling and Reuben, Alexandre and Spencer, Christine N. and Prieto, Peter A. and Miller, John P. and Gopalakrishnan, Vancheswaran and Wang, Feng and Cooper, Zachary A. and Reddy, Sangeetha M. and Gumbs, Curtis and Little, Latasha and Chang, Qing and Chen, Wei-Shen and Wani, Khalida and De Macedo, Mariana Petaccia and Chen, Eveline and Austin-Breneman, Jacob L. and Jiang, Hong and Roszik, Jason and Tetzlaff, Michael T. and Davies, Michael A. and Gershenwald, Jeffrey E. and Tawbi, Hussein and Lazar, Alexander J. and Hwu, Patrick and Hwu, Wen-Jen and Diab, Adi and Glitza, Isabella C. and Patel, Sapna P. and Woodman, Scott E. and Amaria, Rodabe N. and Prieto, Victor G. and Hu, Jianhua and Sharma, Padmanee and Allison, James P. and Chin, Lynda and Zhang, Jianhua and Wargo, Jennifer A. and Futreal, P. Andrew},
+	title = {Integrated molecular analysis of tumor biopsies on sequential CTLA-4 and PD-1 blockade reveals markers of response and resistance},
+	volume = {9},
+	number = {379},
+	elocation-id = {eaah3560},
+	year = {2017},
+	doi = {10.1126/scitranslmed.aah3560},
+	publisher = {American Association for the Advancement of Science},
+	abstract = {Immune checkpoint blockade has greatly improved the success of treatment in melanoma and other tumor types, but it is expensive and does not work for all patients. To optimize the likelihood of therapeutic success and reduce the risks and expense of unnecessary treatment, it would be helpful to find biomarkers that can predict treatment response. Roh et al. studied patients treated with sequential checkpoint inhibitors targeting CTLA-4 and then PD-1. In these patients, the authors discovered that a more clonal T cell population specifically correlates with response to PD-1 blockade, but not CTLA-4, which may help identify the best candidates for this treatment. In addition, increased frequency of gene copy number loss was correlated with decreased responsiveness to either therapy.Immune checkpoint blockade produces clinical benefit in many patients. However, better biomarkers of response are still needed, and mechanisms of resistance remain incompletely understood. To address this, we recently studied a cohort of melanoma patients treated with sequential checkpoint blockade against cytotoxic T lymphocyte antigen{\textendash}4 (CTLA-4) followed by programmed death receptor{\textendash}1 (PD-1) and identified immune markers of response and resistance. Building on these studies, we performed deep molecular profiling including T cell receptor sequencing and whole-exome sequencing within the same cohort and demonstrated that a more clonal T cell repertoire was predictive of response to PD-1 but not CTLA-4 blockade. Analysis of CNAs identified a higher burden of copy number loss in nonresponders to CTLA-4 and PD-1 blockade and found that it was associated with decreased expression of genes in immune-related pathways. The effect of mutational load and burden of copy number loss on response was nonredundant, suggesting the potential utility of a combinatorial biomarker to optimize patient care with checkpoint blockade therapy.},
+	issn = {1946-6234},
+	URL = {https://stm.sciencemag.org/content/9/379/eaah3560},
+	eprint = {https://stm.sciencemag.org/content/9/379/eaah3560.full.pdf},
+	journal = {Science Translational Medicine}
+}
+
+@Article{Messina2012,
+author={Messina, Jane L.
+and Fenstermacher, David A.
+and Eschrich, Steven
+and Qu, Xiaotao
+and Berglund, Anders E.
+and Lloyd, Mark C.
+and Schell, Michael J.
+and Sondak, Vernon K.
+and Weber, Jeffrey S.
+and Mul{\'e}, James J.},
+title={12-Chemokine Gene Signature Identifies Lymph Node-like Structures in Melanoma: Potential for Patient Selection for Immunotherapy?},
+journal={Scientific Reports},
+year={2012},
+month={Oct},
+day={24},
+volume={2},
+number={1},
+pages={765},
+abstract={We have interrogated a 12-chemokine gene expression signature (GES) on genomic arrays of 14,492 distinct solid tumors and show broad distribution across different histologies. We hypothesized that this 12-chemokine GES might accurately predict a unique intratumoral immune reaction in stage IV (non-locoregional) melanoma metastases. The 12-chemokine GES predicted the presence of unique, lymph node-like structures, containing CD20+ B cell follicles with prominent areas of CD3+ T cells (both CD4+ and CD8+ subsets). CD86+, but not FoxP3+, cells were present within these unique structures as well. The direct correlation between the 12-chemokine GES score and the presence of unique, lymph nodal structures was also associated with better overall survival of the subset of melanoma patients. The use of this novel 12-chemokine GES may reveal basic information on in situ mechanisms of the anti-tumor immune response, potentially leading to improvements in the identification and selection of melanoma patients most suitable for immunotherapy.},
+issn={2045-2322},
+doi={10.1038/srep00765},
+url={https://doi.org/10.1038/srep00765}
+}
+
+@article {Davolieaaf8399,
+	author = {Davoli, Teresa and Uno, Hajime and Wooten, Eric C. and Elledge, Stephen J.},
+	title = {Tumor aneuploidy correlates with markers of immune evasion and with reduced response to immunotherapy},
+	volume = {355},
+	number = {6322},
+	elocation-id = {eaaf8399},
+	year = {2017},
+	doi = {10.1126/science.aaf8399},
+	publisher = {American Association for the Advancement of Science},
+	abstract = {Cancer immunotherapy produces durable clinical responses in only a subset of patients. Identification of tumor characteristics that correlate with responses could lead to predictive biomarkers and shed light on causal mechanisms. Davoli et al. found that human tumors with extensive aneuploidy{\textemdash}i.e., that display a highly abnormal number of chromosomes and chromosomal segments{\textemdash}express fewer markers of the immune cells responsible for tumor destruction. In a retrospective analysis of clinical trial data, they found that melanoma patients with highly aneuploid tumors were less likely to benefit from immune checkpoint blockade therapy than patients whose tumors had a more normal karyotype. Thus, aneuploidy appears to enhance the ability of tumors to evade the immune system.Science, this issue p. 10.1126/science.aaf8399 INTRODUCTIONAneuploidy, also known as somatic copy number alterations (SCNAs), is widespread in human cancers and has been proposed to drive tumorigenesis. The relationship between SCNAs and the characteristic functional features or {\textquotedblleft}hallmarks{\textquotedblright} of cancer is not well understood. Among these cancer hallmarks is immune evasion, which is accomplished by neoantigen editing, defects in antigen presentation and inhibition of tumor infiltration, and/or cytotoxic activities of immune cells. Whether and how tumor SCNA levels influence immune evasion is of particular interest as this information could potentially be used to improve the efficacy of immune checkpoint blockade, a therapy that has produced durable responses in a subset of cancer patients.RATIONALEUnderstanding how SCNAs and mutation load affect tumor evolution, and through what mechanisms, is a key objective in cancer research. To explore the relationships between SCNA levels, tumor mutations, and cancer hallmarks, we examined data from 5255 tumor/normal samples representing 12 cancer types from The Cancer Genome Atlas project. We assigned each tumor an SCNA score and looked for correlations with the number and types of tumor mutations. We also compared the gene expression profiles of tumors with high versus low SCNA levels to identify differences in cellular signaling pathways.RESULTSFirst, we found that, for most tumors, there was a positive correlation between SCNA levels and the total number of mutations. Second, tumors harboring activating oncogenic mutations in the receptor tyrosine kinase{\textendash}RAS{\textendash}phosphatidylinositol 3-kinase pathway showed fewer SCNAs, a finding at odds with the hypothesis of oncogene-driven genomic instability. Third, we found that tumors with high levels of SCNAs showed elevated expression of cell cycle and cell proliferation markers (cell cycle signature) and reduced expression of markers for cytotoxic immune cell infiltrates (immune signature). The increased expression level of the cell cycle signature was primarily predicted by focal SCNAs, with a lesser contribution of arm and whole-chromosome SCNAs. In contrast, the lower expression level of the immune signature was primarily predicted by high levels of arm and whole-chromosome SCNAs. SCNA levels were a stronger predictor of markers of cytotoxic immune cell infiltration than tumor mutational load. Finally, through analysis of data from two published clinical trials of immunotherapy in melanoma patients, we found that high SCNA levels in tumors correlated with poorer survival of patients. The combination of the tumor SCNA score and the tumor mutational load was a better predictor of survival after immunotherapy than either biomarker alone.CONCLUSIONWe found that two hallmarks of cancer, cell proliferation and immune evasion, are predicted by distinct types of aneuploidy that likely act through distinct mechanisms. Proliferation markers mainly correlated with focal SCNAs, implying a mechanism related to the action of specific genes targeted by these SCNAs. Immune evasion markers mainly correlated with arm- and chromosome-level SCNAs, consistent with a mechanism related to general gene dosage imbalance rather than the action of specific genes. A retrospective analysis of melanoma patients treated with immune checkpoint blockade anti{\textendash}CTLA-4 (cytotoxic T lymphocyte{\textendash}associated protein 4) therapy revealed that high SCNA levels were associated with a poorer response, suggesting that tumor aneuploidy might be a useful biomarker for predicting which patients are most likely to benefit from this therapy.Genetic events associated with two cancer hallmarks: cell proliferation and immune evasion.Across several human tumor types, high SCNA levels correlate with increased expression of cell cycle markers and decreased expression of markers of cytotoxic immune cell infiltrates. A high load of tumor neoantigens (reflecting a high level of point mutations) promotes the detection of tumors by the immune system, limiting immune evasion. The relative contribution of focal, arm/chromosome, and neoantigen load to the prediction of proliferation and immune evasion is shown.Immunotherapies based on immune checkpoint blockade are highly effective in a subset of patients. An ongoing challenge is the identification of biomarkers that predict which patients will benefit from these therapies. Aneuploidy, also known as somatic copy number alterations (SCNAs), is widespread in cancer and is posited to drive tumorigenesis. Analyzing 12 human cancer types, we find that, for most, highly aneuploid tumors show reduced expression of markers of cytotoxic infiltrating immune cells, especially CD8+ T cells, and increased expression of cell proliferation markers. Different types of SCNAs predict the proliferation and immune signatures, implying distinct underlying mechanisms. Using published data from two clinical trials of immune checkpoint blockade therapy for metastatic melanoma, we found that tumor aneuploidy inversely correlates with patient survival. Together with other tumor characteristics such as tumor mutational load, aneuploidy may thus help identify patients most likely to respond to immunotherapy.},
+	issn = {0036-8075},
+	URL = {https://science.sciencemag.org/content/355/6322/eaaf8399},
+	eprint = {https://science.sciencemag.org/content/355/6322/eaaf8399.full.pdf},
+	journal = {Science}
+}
+
+@article{Ayers2017,
+author = {Mark Ayers AND Jared Lunceford AND Michael Nebozhyn AND Erin Murphy AND Andrey Loboda AND David R. Kaufman AND Andrew Albright AND Jonathan D. Cheng AND S. Peter Kang AND Veena Shankaran AND Sarina A. Piha-Paul AND Jennifer Yearley AND Tanguy Y. Seiwert AND Antoni Ribas AND Terrill K. McClanahan},
+journal = {The Journal of Clinical Investigation},
+publisher = {The American Society for Clinical Investigation},
+title = {IFN-γ–related mRNA profile predicts clinical response to PD-1 blockade},
+year = {2017},
+month = {8},
+volume = {127},
+url = {https://www.jci.org/articles/view/91190},
+pages = {2930-2940},
+abstract = {Programmed death-1–directed (PD-1–directed) immune checkpoint blockade results in durable antitumor activity in many advanced malignancies. Recent studies suggest that IFN-γ is a critical driver of programmed death ligand-1 (PD-L1) expression in cancer and host cells, and baseline intratumoral T cell infiltration may improve response likelihood to anti–PD-1 therapies, including pembrolizumab. However, whether quantifying T cell–inflamed microenvironment is a useful pan-tumor determinant of PD-1–directed therapy response has not been rigorously evaluated. Here, we analyzed gene expression profiles (GEPs) using RNA from baseline tumor samples of pembrolizumab-treated patients. We identified immune-related signatures correlating with clinical benefit using a learn-and-confirm paradigm based on data from different clinical studies of pembrolizumab, starting with a small pilot of 19 melanoma patients and eventually defining a pan-tumor T cell–inflamed GEP in 220 patients with 9 cancers. Predictive value was independently confirmed and compared with that of PD-L1 immunohistochemistry in 96 patients with head and neck squamous cell carcinoma. The T cell–inflamed GEP contained IFN-γ–responsive genes related to antigen presentation, chemokine expression, cytotoxic activity, and adaptive immune resistance, and these features were necessary, but not always sufficient, for clinical benefit. The T cell–inflamed GEP has been developed into a clinical-grade assay that is currently being evaluated in ongoing pembrolizumab trials.},
+number = {8},
+doi = {10.1172/JCI91190},
+url = {https://doi.org/10.1172/JCI91190},
+}
+
+@article{JERBYARNON2018984,
+title = {A Cancer Cell Program Promotes T Cell Exclusion and Resistance to Checkpoint Blockade},
+journal = {Cell},
+volume = {175},
+number = {4},
+pages = {984-997.e24},
+year = {2018},
+issn = {0092-8674},
+doi = {10.1016/j.cell.2018.09.006},
+url = {https://www.sciencedirect.com/science/article/pii/S0092867418311784},
+author = {Livnat Jerby-Arnon and Parin Shah and Michael S. Cuoco and Christopher Rodman and Mei-Ju Su and Johannes C. Melms and Rachel Leeson and Abhay Kanodia and Shaolin Mei and Jia-Ren Lin and Shu Wang and Bokang Rabasha and David Liu and Gao Zhang and Claire Margolais and Orr Ashenberg and Patrick A. Ott and Elizabeth I. Buchbinder and Rizwan Haq and F. Stephen Hodi and Genevieve M. Boland and Ryan J. Sullivan and Dennie T. Frederick and Benchun Miao and Tabea Moll and Keith T. Flaherty and Meenhard Herlyn and Russell W. Jenkins and Rohit Thummalapalli and Monika S. Kowalczyk and Israel Cañadas and Bastian Schilling and Adam N.R. Cartwright and Adrienne M. Luoma and Shruti Malu and Patrick Hwu and Chantale Bernatchez and Marie-Andrée Forget and David A. Barbie and Alex K. Shalek and Itay Tirosh and Peter K. Sorger and Kai Wucherpfennig and Eliezer M. {Van Allen} and Dirk Schadendorf and Bruce E. Johnson and Asaf Rotem and Orit Rozenblatt-Rosen and Levi A. Garraway and Charles H. Yoon and Benjamin Izar and Aviv Regev},
+abstract = {Summary
+Immune checkpoint inhibitors (ICIs) produce durable responses in some melanoma patients, but many patients derive no clinical benefit, and the molecular underpinnings of such resistance remain elusive. Here, we leveraged single-cell RNA sequencing (scRNA-seq) from 33 melanoma tumors and computational analyses to interrogate malignant cell states that promote immune evasion. We identified a resistance program expressed by malignant cells that is associated with T cell exclusion and immune evasion. The program is expressed prior to immunotherapy, characterizes cold niches in situ, and predicts clinical responses to anti-PD-1 therapy in an independent cohort of 112 melanoma patients. CDK4/6-inhibition represses this program in individual malignant cells, induces senescence, and reduces melanoma tumor outgrowth in mouse models in vivo when given in combination with immunotherapy. Our study provides a high-resolution landscape of ICI-resistant cell states, identifies clinically predictive signatures, and suggests new therapeutic strategies to overcome immunotherapy resistance.}
+}
+
+@Article{Cabrita2020,
+author={Cabrita, Rita
+and Lauss, Martin
+and Sanna, Adriana
+and Donia, Marco
+and Skaarup Larsen, Mathilde
+and Mitra, Shamik
+and Johansson, Iva
+and Phung, Bengt
+and Harbst, Katja
+and Vallon-Christersson, Johan
+and van Schoiack, Alison
+and L{\"o}vgren, Kristina
+and Warren, Sarah
+and Jirstr{\"o}m, Karin
+and Olsson, H{\aa}kan
+and Pietras, Kristian
+and Ingvar, Christian
+and Isaksson, Karolin
+and Schadendorf, Dirk
+and Schmidt, Henrik
+and Bastholt, Lars
+and Carneiro, Ana
+and Wargo, Jennifer A.
+and Svane, Inge Marie
+and J{\"o}nsson, G{\"o}ran},
+title={Tertiary lymphoid structures improve immunotherapy and survival in melanoma},
+journal={Nature},
+year={2020},
+month={Jan},
+day={01},
+volume={577},
+number={7791},
+pages={561-565},
+abstract={Checkpoint blockade therapies that reactivate tumour-associated T cells can induce durable tumour control and result in the long-term survival of patients with advanced cancers1. Current predictive biomarkers for therapy response include high levels of intratumour immunological activity, a high tumour mutational burden and specific characteristics of the gut microbiota2,3. Although the role of T cells in antitumour responses has thoroughly been studied, other immune cells remain insufficiently explored. Here we use clinical samples of metastatic melanomas to investigate the role of B cells in antitumour responses, and find that the co-occurrence of tumour-associated CD8+ T cells and CD20+ B cells is associated with improved survival, independently of other clinical variables. Immunofluorescence staining of CXCR5 and CXCL13 in combination with CD20 reveals the formation of tertiary lymphoid structures in these CD8+CD20+ tumours. We derived a gene signature associated with tertiary lymphoid structures, which predicted clinical outcomes in cohorts of patients treated with immune checkpoint blockade. Furthermore, B-cell-rich tumours were accompanied by increased levels of TCF7+ naive and/or memory T cells. This was corroborated by digital spatial-profiling data, in which T cells in tumours without tertiary lymphoid structures had a dysfunctional molecular phenotype. Our results indicate that tertiary lymphoid structures have a key role in the immune microenvironment in melanoma, by conferring distinct T cell phenotypes. Therapeutic strategies to induce the formation of tertiary lymphoid structures should be explored to improve responses to cancer immunotherapy.},
+issn={1476-4687},
+doi={10.1038/s41586-019-1914-8},
+url={https://doi.org/10.1038/s41586-019-1914-8}
+}
+
+@Article{Auslander2018,
+author={Auslander, Noam
+and Zhang, Gao
+and Lee, Joo Sang
+and Frederick, Dennie T.
+and Miao, Benchun
+and Moll, Tabea
+and Tian, Tian
+and Wei, Zhi
+and Madan, Sanna
+and Sullivan, Ryan J.
+and Boland, Genevieve
+and Flaherty, Keith
+and Herlyn, Meenhard
+and Ruppin, Eytan},
+title={Robust prediction of response to immune checkpoint blockade therapy in metastatic melanoma},
+journal={Nature Medicine},
+year={2018},
+month={Oct},
+day={01},
+volume={24},
+number={10},
+pages={1545-1549},
+abstract={Immune checkpoint blockade (ICB) therapy provides remarkable clinical gains and has been very successful in treatment of melanoma. However, only a subset of patients with advanced tumors currently benefit from ICB therapies, which at times incur considerable side effects and costs. Constructing predictors of patient response has remained a serious challenge because of the complexity of the immune response and the shortage of large cohorts of ICB-treated patients that include both `omics' and response data. Here we build immuno-predictive score (IMPRES), a predictor of ICB response in melanoma which encompasses 15 pairwise transcriptomics relations between immune checkpoint genes. It is based on two key conjectures: (i) immune mechanisms underlying spontaneous regression in neuroblastoma can predict melanoma response to ICB, and (ii) key immune interactions can be captured via specific pairwise relations of the expression of immune checkpoint genes. IMPRES is validated on nine published datasets1--6 and on a newly generated dataset with 31 patients treated with anti-PD-1 and 10 with anti-CTLA-4, spanning 297 samples in total. It achieves an overall accuracy of AUC{\thinspace}={\thinspace}0.83, outperforming existing predictors and capturing almost all true responders while misclassifying less than half of the nonresponders. Future studies are warranted to determine the value of the approach presented here in other cancer types.},
+issn={1546-170X},
+doi={10.1038/s41591-018-0157-9},
+url={https://doi.org/10.1038/s41591-018-0157-9}
+}
+
+@Article{Fu2019,
+author={Fu, Yelin
+and Qi, Lishuang
+and Guo, Wenbing
+and Jin, Liangliang
+and Song, Kai
+and You, Tianyi
+and Zhang, Shuobo
+and Gu, Yunyan
+and Zhao, Wenyuan
+and Guo, Zheng},
+title={A qualitative transcriptional signature for predicting microsatellite instability status of right-sided Colon Cancer},
+journal={BMC Genomics},
+year={2019},
+month={Oct},
+day={23},
+volume={20},
+number={1},
+pages={769},
+abstract={Microsatellite instability (MSI) accounts for about 15{\%} of colorectal cancer and is associated with prognosis. Today, MSI is usually detected by polymerase chain reaction amplification of specific microsatellite markers. However, the instability is identified by comparing the length of microsatellite repeats in tumor and normal samples. In this work, we developed a qualitative transcriptional signature to individually predict MSI status for right-sided colon cancer (RCC) based on tumor samples.},
+issn={1471-2164},
+doi={10.1186/s12864-019-6129-8},
+url={https://doi.org/10.1186/s12864-019-6129-8}
+}
+
+@Article{Chang2013,
+author={Chang, Kyle
+and Creighton, Chad J.
+and Davis, Caleb
+and Donehower, Lawrence
+and Drummond, Jennifer
+and Wheeler, David
+and Ally, Adrian
+and Balasundaram, Miruna
+and Birol, Inanc
+and Butterfield, Yaron S. N.
+and Chu, Andy
+and Chuah, Eric
+and Chun, Hye-Jung E.
+and Dhalla, Noreen
+and Guin, Ranabir
+and Hirst, Martin
+and Hirst, Carrie
+and Holt, Robert A.
+and Jones, Steven J. M.
+and Lee, Darlene
+and Li, Haiyan I.
+and Marra, Marco A.
+and Mayo, Michael
+and Moore, Richard A.
+and Mungall, Andrew J.
+and Robertson, A. Gordon
+and Schein, Jacqueline E.
+and Sipahimalani, Payal
+and Tam, Angela
+and Thiessen, Nina
+and Varhol, Richard J.
+and Beroukhim, Rameen
+and Bhatt, Ami S.
+and Brooks, Angela N.
+and Cherniack, Andrew D.
+and Freeman, Samuel S.
+and Gabriel, Stacey B.
+and Helman, Elena
+and Jung, Joonil
+and Meyerson, Matthew
+and Ojesina, Akinyemi I.
+and Pedamallu, Chandra Sekhar
+and Saksena, Gordon
+and Schumacher, Steven E.
+and Tabak, Barbara
+and Zack, Travis
+and Lander, Eric S.
+and Bristow, Christopher A.
+and Hadjipanayis, Angela
+and Haseley, Psalm
+and Kucherlapati, Raju
+and Lee, Semin
+and Lee, Eunjung
+and Luquette, Lovelace J.
+and Mahadeshwar, Harshad S.
+and Pantazi, Angeliki
+and Parfenov, Michael
+and Park, Peter J.
+and Protopopov, Alexei
+and Ren, Xiaojia
+and Santoso, Netty
+and Seidman, Jonathan
+and Seth, Sahil
+and Song, Xingzhi
+and Tang, Jiabin
+and Xi, Ruibin
+and Xu, Andrew W.
+and Yang, Lixing
+and Zeng, Dong
+and Auman, J. Todd
+and Balu, Saianand
+and Buda, Elizabeth
+and Fan, Cheng
+and Hoadley, Katherine A.
+and Jones, Corbin D.
+and Meng, Shaowu
+and Mieczkowski, Piotr A.
+and Parker, Joel S.
+and Perou, Charles M.
+and Roach, Jeffrey
+and Shi, Yan
+and Silva, Grace O.
+and Tan, Donghui
+and Veluvolu, Umadevi
+and Waring, Scot
+and Wilkerson, Matthew D.
+and Wu, Junyuan
+and Zhao, Wei
+and Bodenheimer, Tom
+and Hayes, D. Neil
+and Hoyle, Alan P.
+and Jeffreys, Stuart R.
+and Mose, Lisle E.
+and Simons, Janae V.
+and Soloway, Mathew G.
+and Baylin, Stephen B.
+and Berman, Benjamin P.
+and Bootwalla, Moiz S.
+and Danilova, Ludmila
+and Herman, James G.
+and Hinoue, Toshinori
+and Laird, Peter W.
+and Rhie, Suhn K.
+and Shen, Hui
+and Triche, Timothy
+and Weisenberger, Daniel J.
+and Carter, Scott L.
+and Cibulskis, Kristian
+and Chin, Lynda
+and Zhang, Jianhua
+and Getz, Gad
+and Sougnez, Carrie
+and Wang, Min
+and Dinh, Huyen
+and Doddapaneni, Harsha Vardhan
+and Gibbs, Richard
+and Gunaratne, Preethi
+and Han, Yi
+and Kalra, Divya
+and Kovar, Christie
+and Lewis, Lora
+and Morgan, Margaret
+and Morton, Donna
+and Muzny, Donna
+and Reid, Jeffrey
+and Xi, Liu
+and Cho, Juok
+and DiCara, Daniel
+and Frazer, Scott
+and Gehlenborg, Nils
+and Heiman, David I.
+and Kim, Jaegil
+and Lawrence, Michael S.
+and Lin, Pei
+and Liu, Yingchun
+and Noble, Michael S.
+and Stojanov, Petar
+and Voet, Doug
+and Zhang, Hailei
+and Zou, Lihua
+and Stewart, Chip
+and Bernard, Brady
+and Bressler, Ryan
+and Eakin, Andrea
+and Iype, Lisa
+and Knijnenburg, Theo
+and Kramer, Roger
+and Kreisberg, Richard
+and Leinonen, Kalle
+and Lin, Jake
+and Liu, Yuexin
+and Miller, Michael
+and Reynolds, Sheila M.
+and Rovira, Hector
+and Shmulevich, Ilya
+and Thorsson, Vesteinn
+and Yang, Da
+and Zhang, Wei
+and Amin, Samirkumar
+and Wu, Chang-Jiun
+and Wu, Chia-Chin
+and Akbani, Rehan
+and Aldape, Kenneth
+and Baggerly, Keith A.
+and Broom, Bradley
+and Casasent, Tod D.
+and Cleland, James
+and Creighton, Chad
+and Dodda, Deepti
+and Edgerton, Mary
+and Han, Leng
+and Herbrich, Shelley M.
+and Ju, Zhenlin
+and Kim, Hoon
+and Lerner, Seth
+and Li, Jun
+and Liang, Han
+and Liu, Wenbin
+and Lorenzi, Philip L.
+and Lu, Yiling
+and Melott, James
+and Mills, Gordon B.
+and Nguyen, Lam
+and Su, Xiaoping
+and Verhaak, Roeland
+and Wang, Wenyi
+and Weinstein, John N.
+and Wong, Andrew
+and Yang, Yang
+and Yao, Jun
+and Yao, Rong
+and Yoshihara, Kosuke
+and Yuan, Yuan
+and Yung, Alfred K.
+and Zhang, Nianxiang
+and Zheng, Siyuan
+and Ryan, Michael
+and Kane, David W.
+and Aksoy, B. Arman
+and Ciriello, Giovanni
+and Dresdner, Gideon
+and Gao, Jianjiong
+and Gross, Benjamin
+and Jacobsen, Anders
+and Kahles, Andre
+and Ladanyi, Marc
+and Lee, William
+and Lehmann, Kjong-Van
+and Miller, Martin L.
+and Ramirez, Ricardo
+and R{\"a}tsch, Gunnar
+and Reva, Boris
+and Sander, Chris
+and Schultz, Nikolaus
+and Senbabaoglu, Yasin
+and Shen, Ronglai
+and Sinha, Rileen
+and Sumer, S. Onur
+and Sun, Yichao
+and Taylor, Barry S.
+and Weinhold, Nils
+and Fei, Suzanne
+and Spellman, Paul
+and Benz, Christopher
+and Carlin, Daniel
+and Cline, Melisssa
+and Craft, Brian
+and Ellrott, Kyle
+and Goldman, Mary
+and Haussler, David
+and Ma, Singer
+and Ng, Sam
+and Paull, Evan
+and Radenbaugh, Amie
+and Salama, Sofie
+and Sokolov, Artem
+and Stuart, Joshua M.
+and Swatloski, Teresa
+and Uzunangelov, Vladislav
+and Waltman, Peter
+and Yau, Christina
+and Zhu, Jing
+and Hamilton, Stanley R.
+and Abbott, Scott
+and Abbott, Rachel
+and Dees, Nathan D.
+and Delehaunty, Kim
+and Ding, Li
+and Dooling, David J.
+and Eldred, Jim M.
+and Fronick, Catrina C.
+and Fulton, Robert
+and Fulton, Lucinda L.
+and Kalicki-Veizer, Joelle
+and Kanchi, Krishna-Latha
+and Kandoth, Cyriac
+and Koboldt, Daniel C.
+and Larson, David E.
+and Ley, Timothy J.
+and Lin, Ling
+and Lu, Charles
+and Magrini, Vincent J.
+and Mardis, Elaine R.
+and McLellan, Michael D.
+and McMichael, Joshua F.
+and Miller, Christopher A.
+and O'Laughlin, Michelle
+and Pohl, Craig
+and Schmidt, Heather
+and Smith, Scott M.
+and Walker, Jason
+and Wallis, John W.
+and Wendl, Michael C.
+and Wilson, Richard K.
+and Wylie, Todd
+and Zhang, Qunyuan
+and Burton, Robert
+and Jensen, Mark A.
+and Kahn, Ari
+and Pihl, Todd
+and Pot, David
+and Wan, Yunhu
+and Levine, Douglas A.
+and Black, Aaron D.
+and Bowen, Jay
+and Network, The Cancer Genome Atlas Research
+and Center, Genome Characterization
+and Center, Genome Data Analysis
+and Center, Sequencing
+and Center, Data Coordinating
+and Site, Tissue Source
+and Center, Biospecimen Core Resource},
+title={The Cancer Genome Atlas Pan-Cancer analysis project},
+journal={Nature Genetics},
+year={2013},
+month={Oct},
+day={01},
+volume={45},
+number={10},
+pages={1113-1120},
+abstract={Current clinical practice is organized according to tissue or organ of origin of tumors. Now, The Cancer Genome Atlas (TCGA) Research Network has started to identify genomic and other molecular commonalities among a dozen different types of cancer. Emerging similarities and contrasts will form the basis for targeted therapies of the future and for repurposing existing therapies by molecular rather than histological similarities of the diseases.},
+issn={1546-1718},
+doi={10.1038/ng.2764},
+url={https://doi.org/10.1038/ng.2764}
+}
+
+@Article{Mariathasan2018,
+author={Mariathasan, Sanjeev
+and Turley, Shannon J.
+and Nickles, Dorothee
+and Castiglioni, Alessandra
+and Yuen, Kobe
+and Wang, Yulei
+and Kadel III, Edward E.
+and Koeppen, Hartmut
+and Astarita, Jillian L.
+and Cubas, Rafael
+and Jhunjhunwala, Suchit
+and Banchereau, Romain
+and Yang, Yagai
+and Guan, Yinghui
+and Chalouni, Cecile
+and Ziai, James
+and {\c{S}}enbabao{\u{g}}lu, Yasin
+and Santoro, Stephen
+and Sheinson, Daniel
+and Hung, Jeffrey
+and Giltnane, Jennifer M.
+and Pierce, Andrew A.
+and Mesh, Kathryn
+and Lianoglou, Steve
+and Riegler, Johannes
+and Carano, Richard A. D.
+and Eriksson, Pontus
+and H{\"o}glund, Mattias
+and Somarriba, Loan
+and Halligan, Daniel L.
+and van der Heijden, Michiel S.
+and Loriot, Yohann
+and Rosenberg, Jonathan E.
+and Fong, Lawrence
+and Mellman, Ira
+and Chen, Daniel S.
+and Green, Marjorie
+and Derleth, Christina
+and Fine, Gregg D.
+and Hegde, Priti S.
+and Bourgon, Richard
+and Powles, Thomas},
+title={TGF$\beta$ attenuates tumour response to PD-L1 blockade by contributing to exclusion of T cells},
+journal={Nature},
+year={2018},
+month={Feb},
+day={01},
+volume={554},
+number={7693},
+pages={544-548},
+abstract={In humans, TGF$\beta$ signalling is associated with lack of response to immunotherapy in immune-excluded tumours; in mouse models of this immune phenotype, robust tumour infiltration by T cells and tumour regression are observed only when checkpoint inhibition is combined with inhibition of TGF$\beta$ signalling.},
+issn={1476-4687},
+doi={10.1038/nature25501},
+url={https://doi.org/10.1038/nature25501}
+}

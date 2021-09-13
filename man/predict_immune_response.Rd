@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_immune_response.R
 \name{predict_immune_response}
 \alias{predict_immune_response}
-\title{Immune response prediction}
+\title{Compute predicted immune response}
 \usage{
 predict_immune_response(
   pathways = NULL,
@@ -10,35 +10,75 @@ predict_immune_response(
   tfs = NULL,
   lrpairs = NULL,
   ccpairs = NULL,
-  cancertype
+  cancer_type,
+  verbose = TRUE
 )
 }
 \arguments{
-\item{pathways}{numeric matrix with data}
+\item{pathways}{numeric matrix with pathways activity (rows = samples; columns = pathways).}
 
-\item{immunecells}{numeric matrix with data}
+\item{immunecells}{numeric matrix with immune cell quantification (rows = samples; columns = cell types).}
 
-\item{tfs}{numeric matrix with data}
+\item{tfs}{numeric matrix with transcription factors activity (rows = samples; columns = transcription factors).}
 
-\item{lrpairs}{numeric matrix with data}
+\item{lrpairs}{numeric matrix with ligand-receptor weights (rows = samples; columns = ligand-receptor pairs).}
 
-\item{ccpairs}{numeric matrix with data}
+\item{ccpairs}{numeric matrix with cell-cell scores (rows = samples; columns = cell-cell pairs).}
 
-\item{cancertype}{string character}
+\item{cancer_type}{character string indicating which cancer-specific model should be used to compute the predictions.}
+
+\item{verbose}{logical flag indicating whether to display messages about the process.}
 }
 \value{
-Predictions for each model building.
+A list containing the predictions for each quantitative descriptor and for each task.
+Given that the model training was repeated 100 times with randomized-cross validation, a set of 100 predictions is returned.
 }
 \description{
-\code{predict_immune_response} predicts immune response using two algorithms: multi-task elastic net
-and bayesian efficient multi-kernel algorithm. While BEMKL can exploit information across different input and output datasets,
-multi-task elastic net can only do so for response variables. Another advantage of BEMKL is missing data handling, which is not
-the case for the other algorithm.
-}
-\details{
-These algorithms use model parameters learned during training on different types of data in
-order to compute the immune response.
+This function calculates predictions of patients' immune response using the quantitative descriptors
+data as input features and the model parameters defined during training.
 }
 \examples{
-# TODOTODO
+# Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+# Original processed data is available from IMvigor210CoreBiologies package.
+library("easierData")
+dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+RNA_counts <- dataset_mariathasan@assays@data@listData[["counts"]]
+cancer_type <- dataset_mariathasan@metadata$cancertype
+
+# Computation of cell fractions (Finotello et al., Genome Med, 2019)
+cell_fractions <- compute_cell_fractions(RNA_tpm = RNA_tpm)
+
+# Computation of pathway scores (Holland et al., BBAGRM, 2019; Schubert et al., Nat Commun, 2018)
+pathway_activity <- compute_pathway_activity(
+  RNA_counts = RNA_counts,
+  remove_sig_genes_immune_response = TRUE
+)
+
+# Computation of TF activity (Garcia-Alonso et al., Genome Res, 2019)
+tf_activity <- compute_TF_activity(
+  RNA_tpm = RNA_tpm
+)
+
+# Computation of ligand-receptor pair weights
+lrpair_weights <- compute_LR_pairs(
+  RNA_tpm = RNA_tpm,
+  cancer_type = "pancan"
+)
+
+# Computation of cell-cell interaction scores
+ccpair_scores <- compute_CC_pairs(
+  lrpairs = lrpair_weights,
+  cancer_type = "pancan"
+)
+
+# Predict patients' immune response
+predictions_immune_response <- predict_immune_response(
+  pathways = pathway_activity,
+  immunecells = cell_fractions,
+  tfs = tf_activity,
+  lrpairs = lrpair_weights,
+  ccpairs = ccpair_scores,
+  cancer_type = cancer_type
+)
 }

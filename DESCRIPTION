@@ -1,11 +1,11 @@
 Package: easier
-Title: Evaluate patient immune response to ICBs through a systems approach
+Title: Estimate Systems Immune Response from RNA-seq data
 Version: 0.9.0
 Authors@R: 
     c(
         person(
-            given = "Oscar", family = "Lapuente Santana", role = c("aut", "cre"), 
-            email = "xx@yy.zz", comment = c(ORCID = "xxxxx")
+            given = "Oscar", family = "Lapuente-Santana", role = c("aut", "cre"), 
+            email = "oscar.lapuente.santana@gmail.com", comment = c(ORCID = "0000-0003-1995-8393")
         ),
         person(
             given = "Federico", family = "Marini", role = "aut", 
@@ -13,53 +13,62 @@ Authors@R:
         ),
         person(
             given = "Arsenij", family = "Ustjanzew", role = "aut", 
-            email = "xx@yy.zz", comment = c(ORCID = "0000-0002-1014-4521")
+            email = "arsenij.ustjanzew@uni-mainz.de", comment = c(ORCID = "0000-0002-1014-4521")
         ),
         person(
             given = "Francesca", family = "Finotello", role = "aut", 
-            email = "xx@yy.zz", comment = c(ORCID = "0000-0003-0712-4658")
+            email = "francesca.finotello@i-med.ac.at", comment = c(ORCID = "0000-0003-0712-4658")
         ),
         person(
             given = "Federica", family = "Eduati", role = "aut", 
-            email = "xx@yy.zz", comment = c(ORCID = "0000-0002-7822-3867")
+            email = "f.eduati@tue.nl", comment = c(ORCID = "0000-0002-7822-3867")
         )
     )
-Description: This package allows researchers to assess patients' likelihood to respond to ICB therapies. 
-             A machine learning model integrates patient transcriptomics data to gain insights into the 
-             effect of ICBs on the patient immune response. TODO another sentence TODO.
+Description: This package provides a workflow for the use of EaSIeR tool, developed to assess patients' likelihood
+             to respond to ICB therapies providing just the patients' RNA-seq data as input. We integrate RNA-seq 
+             data with different types of prior knowledge to extract quantitative descriptors of the tumor 
+             microenvironment from several points of view, including composition of the immune repertoire, and 
+             activity of intra- and extra-cellular communications. Then, we use multi-task machine learning trained
+             in TCGA data to identify how these descriptors can simultaneously predict several state-of-the-art 
+             hallmarks of anti-cancer immune response. In this way we derive cancer-specific models and identify 
+             cancer-specific systems biomarkers of immune response. These biomarkers have been experimentally validated
+             in the literature and the performance of EaSIeR predictions has been validated using independent datasets
+             form four different cancer types with patients treated with anti-PD1 or anti-PDL1 therapy.
 Depends:
-    R (>= 4.0)
+    R (>= 4.1.0)
 Imports: 
     progeny,
-    remotes,
+    easierData,
+    dorothea,
+    quantiseqr,
     ROCR,
-    grDevices,
+    grDevices, 
     stats,
     graphics,
     ggplot2,
     grid,
     DESeq2,
     utils,
-    pdist,
-    dorothea,
     dplyr,
     matrixStats,
-    preprocessCore,
-    immunedeconv,
-    arules
-Remotes:
-    icbi-lab/immunedeconv
+    rlang,
+    arules, 
+    BiocParallel,
+    reshape2,
+    rstatix,
+    ggrepel,
+    remotes
+Remotes: 
+    saezlab/progeny,
+    olapuentesantana/easierData
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 
-    knitr,
-    rmarkdown,
-    testthat
+    knitr, rmarkdown, BiocStyle, testthat
 VignetteBuilder: knitr
 biocViews:
-    GeneExpression, Software, Transcription, Transcriptomics,Pathways, 
+    GeneExpression, Software, Transcription, SystemsBiology,Pathways, 
     GeneSetEnrichment, ImmunoOncology, Epigenetics, Classification, 
-    BiomedicalInformatics,
+    BiomedicalInformatics, Regression, ExperimentHubSoftware

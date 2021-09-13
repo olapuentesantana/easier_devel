@@ -1,119 +1,145 @@
-#' Immune response prediction
+#' Compute predicted immune response
 #'
-#' \code{predict_immune_response} predicts immune response using two algorithms: multi-task elastic net
-#' and bayesian efficient multi-kernel algorithm. While BEMKL can exploit information across different input and output datasets,
-#' multi-task elastic net can only do so for response variables. Another advantage of BEMKL is missing data handling, which is not
-#' the case for the other algorithm.
-#'
-#' These algorithms use model parameters learned during training on different types of data in
-#' order to compute the immune response.
+#' This function calculates predictions of patients' immune response using the quantitative descriptors
+#' data as input features and the model parameters defined during training.
 #'
 #' @importFrom utils combn
 #' @importFrom stats na.omit
+#' @importFrom BiocParallel register bplapply MulticoreParam
+#' @importFrom easierData get_opt_models get_opt_xtrain_stats
 #'
 #' @export
 #'
-#' @param pathways numeric matrix with data
-#' @param immunecells numeric matrix with data
-#' @param tfs numeric matrix with data
-#' @param lrpairs numeric matrix with data
-#' @param ccpairs numeric matrix with data
-#' @param cancertype string character
+#' @param pathways numeric matrix with pathways activity (rows = samples; columns = pathways).
+#' @param immunecells numeric matrix with immune cell quantification (rows = samples; columns = cell types).
+#' @param tfs numeric matrix with transcription factors activity (rows = samples; columns = transcription factors).
+#' @param lrpairs numeric matrix with ligand-receptor weights (rows = samples; columns = ligand-receptor pairs).
+#' @param ccpairs numeric matrix with cell-cell scores (rows = samples; columns = cell-cell pairs).
+#' @param cancer_type character string indicating which cancer-specific model should be used to compute the predictions.
+#' @param verbose logical flag indicating whether to display messages about the process.
 #'
-#' @return Predictions for each model building.
+#' @return A list containing the predictions for each quantitative descriptor and for each task.
+#' Given that the model training was repeated 100 times with randomized-cross validation, a set of 100 predictions is returned.
 #'
 #' @examples
-#' # TODOTODO
-predict_immune_response <- function(pathways=NULL, immunecells=NULL, tfs=NULL, lrpairs=NULL, ccpairs=NULL, cancertype){
-
-  try(if(missing(cancertype)) stop("cancer type needs to be specified"))
-  try(if(all(is.null(pathways),is.null(immunecells), is.null(tfs), is.null(lrpairs), is.null(ccpairs))) stop("none signature specified"))
-
-  # Simplify efforts: get data in lowercase variables
-  pathways.cor <- pathways
-  lrpairs.spec.pc <- lrpairs
-  ccpairsgroupedscores.spec.pc <- ccpairs
+#' # Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+#' # Original processed data is available from IMvigor210CoreBiologies package.
+#' library("easierData")
+#' dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+#' RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+#' RNA_counts <- dataset_mariathasan@assays@data@listData[["counts"]]
+#' cancer_type <- dataset_mariathasan@metadata$cancertype
+#'
+#' # Computation of cell fractions (Finotello et al., Genome Med, 2019)
+#' cell_fractions <- compute_cell_fractions(RNA_tpm = RNA_tpm)
+#'
+#' # Computation of pathway scores (Holland et al., BBAGRM, 2019; Schubert et al., Nat Commun, 2018)
+#' pathway_activity <- compute_pathway_activity(
+#'   RNA_counts = RNA_counts,
+#'   remove_sig_genes_immune_response = TRUE
+#' )
+#'
+#' # Computation of TF activity (Garcia-Alonso et al., Genome Res, 2019)
+#' tf_activity <- compute_TF_activity(
+#'   RNA_tpm = RNA_tpm
+#' )
+#'
+#' # Computation of ligand-receptor pair weights
+#' lrpair_weights <- compute_LR_pairs(
+#'   RNA_tpm = RNA_tpm,
+#'   cancer_type = "pancan"
+#' )
+#'
+#' # Computation of cell-cell interaction scores
+#' ccpair_scores <- compute_CC_pairs(
+#'   lrpairs = lrpair_weights,
+#'   cancer_type = "pancan"
+#' )
+#'
+#' # Predict patients' immune response
+#' predictions_immune_response <- predict_immune_response(
+#'   pathways = pathway_activity,
+#'   immunecells = cell_fractions,
+#'   tfs = tf_activity,
+#'   lrpairs = lrpair_weights,
+#'   ccpairs = ccpair_scores,
+#'   cancer_type = cancer_type
+#' )
+predict_immune_response <- function(pathways = NULL,
+                                    immunecells = NULL,
+                                    tfs = NULL,
+                                    lrpairs = NULL,
+                                    ccpairs = NULL,
+                                    cancer_type,
+                                    verbose = TRUE) {
+  if (missing(cancer_type)) stop("cancer type needs to be specified")
+  if (all(is.null(pathways), is.null(immunecells), is.null(tfs), is.null(lrpairs), is.null(ccpairs))) stop("none signature specified")
 
   # Initialize variables
-  views <- c(Pathways.cor = 'gaussian',
-             ImmuneCells = 'gaussian',
-             TFs = 'gaussian',
-             LRpairs.spec.pc = 'gaussian',
-             CCpairsGroupedScores.spec.pc = 'gaussian')
-
-  view_combinations <- NULL
-
-  algorithm <-  c("Multi_Task_EN") #,"BEMKL")
+  views <- c(
+    pathways = "gaussian",
+    immunecells = "gaussian",
+    tfs = "gaussian",
+    lrpairs = "gaussian",
+    ccpairs = "gaussian"
+  )
 
   # Check which views are missing
-  miss_views <- c(ifelse(missing(pathways), NA, 1),
-                  ifelse(missing(immunecells), NA, 2),
-                  ifelse(missing(tfs), NA, 3),
-                  ifelse(missing(lrpairs), NA, 4),
-                  ifelse(missing(ccpairs), NA, 5))
+  miss_views <- c(
+    ifelse(missing(pathways), NA, 1),
+    ifelse(missing(immunecells), NA, 2),
+    ifelse(missing(tfs), NA, 3),
+    ifelse(missing(lrpairs), NA, 4),
+    ifelse(missing(ccpairs), NA, 5)
+  )
 
-  # Possible combinations
-  possible_combo <- combn(miss_views, m = 2)[,1:9]
-
-  # Remove combinations with are not feasible due to missing views
-  if(anyNA(miss_views)){
-    possible_combo <- possible_combo[,!is.na(colSums(possible_combo)), drop=FALSE]
-  }
-
-  # Views single
-  view_simples <- lapply(miss_views[!is.na(miss_views)], function(X){
-    tmp <- views[X] ; return(tmp)
+  # Single views
+  view_simples <- lapply(miss_views[!is.na(miss_views)], function(X) {
+    tmp <- views[X]
+    return(tmp)
   })
 
-  # Views combination
-  if(is.matrix(possible_combo) & dim(possible_combo)[2] > 1) {
-    view_combinations <- lapply(1:ncol(possible_combo), function(X){
-      tmp <- views[possible_combo[,X]] ; return(tmp)
-    })
-  }
-  view_combinations <- c(view_simples, view_combinations)
+  # All corresponding views
+  view_combinations <- view_simples
 
-  # Remove unavailable combo
-  combo_names <- sapply(1:length(view_combinations), function(X) {
-    paste(names(view_combinations[[X]]), collapse = "_")
-  })
+  # Retrieve internal data
+  opt_models <- suppressMessages(easierData::get_opt_models())
+  opt_xtrain_stats <- suppressMessages(easierData::get_opt_xtrain_stats())
 
-  # Immune cells features curation:
-  if (missing(immunecells) == FALSE){
-    colnames(immunecells) <-  gsub(".","_", colnames(immunecells), fixed = TRUE)
-  }
-
-  all_predictions <- lapply(1:length(view_combinations), function(X){
-
-    view_info <- view_combinations[[X]]
-    view_name <- paste(names(view_info), collapse="_")
+  compute_prediction <- function(view, verbose, opt_models, opt_xtrain_stats, cancer_type) {
+    view_info <- view_combinations[[view]]
+    view_name <- paste(names(view_info), collapse = "_")
     view_data <- lapply(tolower(names(view_info)), function(x) as.data.frame(get(x)))
     names(view_data) <- names(view_info)
-    message(X,".view source: ", view_name, "\n")
+    if (verbose) message("Computing predictions using ", view_name, "...\n")
 
-    # Predict immune response using model parameters
-    summary_alg <- lapply(algorithm, function(alg){
-
-      if (alg %in% c("BEMKL")){
-
-        pred_alg <- predict_with_bemkl(view_name = view_name,
-                                       view_info = view_info,
-                                       view_data = view_data,
-                                       learned_model = trained_models[[cancertype]][[view_name]])
-
-      }else if (alg %in% c("Multi_Task_EN")){
-
-        pred_alg <- predict_with_multitaskelasticnet(view_name = view_name,
-                                                     view_info = view_info,
-                                                     view_data = view_data,
-                                                     learned_model = trained_models[[cancertype]][[view_name]])
-      }
-      return(pred_alg)
+    # Initialize variables
+    opt_model_cancer_view_spec <- lapply(view_name, function(X) {
+      return(opt_models[[cancer_type]][[X]])
     })
-    names(summary_alg) <- algorithm
-    return(summary_alg)
-  })
-  names(all_predictions) <- combo_names
-  return(all_predictions)
+    names(opt_model_cancer_view_spec) <- view_name
+    opt_xtrain_stats_cancer_view_spec <- lapply(view_name, function(X) {
+      return(opt_xtrain_stats[[cancer_type]][[X]])
+    })
+    names(opt_xtrain_stats_cancer_view_spec) <- view_name
 
+    # Predict immune response using RMTLR model parameters
+    prediction_view <- predict_with_rmtlr(
+      view_name = view_name,
+      view_info = view_info,
+      view_data = view_data,
+      opt_model_cancer_view_spec = opt_model_cancer_view_spec,
+      opt_xtrain_stats_cancer_view_spec = opt_xtrain_stats_cancer_view_spec
+    )
+
+    return(prediction_view)
+  }
+  # Parallelize views model predictions
+  BiocParallel::register(BiocParallel::MulticoreParam(workers = 2))
+  all_predictions <- BiocParallel::bplapply(1:length(view_combinations), FUN = compute_prediction, verbose = verbose, opt_models, opt_xtrain_stats, cancer_type)
+
+  names(all_predictions) <- sapply(1:length(view_combinations), function(X) {
+    paste(names(view_combinations[[X]]), collapse = "_")
+  })
+  return(all_predictions)
 }

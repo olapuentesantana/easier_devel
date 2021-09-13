@@ -1,50 +1,83 @@
-#' Calculate overall expression (OE)
+#' Compute overall expression (OE) of the immune resistance program derived in Jerby-Arnon et al., 2018.
 #'
-#' \code{get_OE_bulk} obtained from literature to calculate Immune resistance program  (Jerby-Arnon et al., 2018)
+#' This function calculates the overall expression of the immune resistance program which is based on a set of
+#' gene signatures associated with T cell exclusion, post-treatment and functional resistance.
+#' The code was provided via Github https://github.com/livnatje/ImmuneResistance/blob/master/Code/ImmRes_OE.R.
+#'
+#' @references Jerby-Arnon, L., Shah, P., Cuoco, M.S., Rodman, C., Su, M.-J., Melms, J.C., Leeson, R., Kanodia, A., Mei, S., Lin, J.-R., et al. (2018).
+#' A Cancer Cell Program Promotes T Cell Exclusion and Resistance to Checkpoint Blockade. Cell 175, 984–997.e24. https://doi.org/10.1016/j.cell.2018.09.006
 #'
 #' @importFrom arules discretize
 #'
-#' @param r list
-#' @param gene.sign string
-#' @param num.rounds integer
-#' @param full.flag boolean
+#' @param r list containing a numeric matrix with bulk RNA-Seq data (tpm values) and a character string with the available gene names.
+#' @param gene_sign list containing different character strings associated with subsets of the resistance program.
+#' @param num_rounds integer value related to the number of random gene signatures samples to be computed for normalization.
+#' Jerby-Arnon et al. found that 1000 random signatures were sufficient to yield an estimate of the expected value.
+#' @param full_flag logical flag indicating whether to return also random scores.
+#' @param verbose logical flag indicating whether to display messages about the process.
 #'
-#' @return Random score
+#' @return A bumeric matrix with computed scores for each sample and subset of signatures included in the immune resistance program
+#' (rows = samples; columns = gene signatures)
 #'
 #' @examples
-#' # TODOTODO
-get_OE_bulk <- function(r,gene.sign = NULL,num.rounds = 1000,full.flag = FALSE){
+#' # Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+#' # Original processed data is available from IMvigor210CoreBiologies package.
+#' library("easierData")
+#' dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+#' RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+#'
+#' # Log2 transformation:
+#' log2_RNA_tpm <- log2(RNA_tpm + 1)
+#'
+#' # Prepare input data
+#' r <- list()
+#' r$tpm <- log2_RNA_tpm
+#' r$genes <- rownames(log2_RNA_tpm)
+#'
+#' # Gene signature of immune resistance program
+#' score_signature_genes <- suppressMessages(easierData::get_scores_signature_genes())
+#' RIR_gene_signature <- score_signature_genes$RIR
+#'
+#' # Apply function to calculate OE:
+#' res_scores <- get_OE_bulk(r, gene_sign = RIR_gene_signature, verbose = TRUE)
+get_OE_bulk <- function(r,
+                        gene_sign = NULL,
+                        num_rounds = 1000,
+                        full_flag = FALSE,
+                        verbose = TRUE) {
   set.seed(1234)
-  r$genes.mean <- rowMeans(r$tpm)
-  r$zscores <- sweep(r$tpm,1,r$genes.mean,FUN = '-')
-  r$genes.dist <- r$genes.mean
-  r$genes.dist.q <- arules::discretize(r$genes.dist,n.cat = 50)
-  r$sig.scores <- matrix(data = 0,nrow = ncol(r$tpm),ncol = length(gene.sign))
-  sig.names <- names(gene.sign)
-  colnames(r$sig.scores) <- sig.names
-  r$sig.scores.raw <- r$sig.scores
-  rand.flag <- is.null(r$rand.scores)|!all(is.element(names(gene.sign),colnames(r$rand.scores)))
-  if(rand.flag){
-    # TODOTODO: maybe use message instead - it is handled in a more gentle way and could be suppressed in practical manners ;)
-    # TODOTODO: could apply to other print commands
-    print("Computing also random scores.")
-    r$rand.scores <- r$sig.scores
+  r$genes_mean <- rowMeans(r$tpm)
+  r$zscores <- sweep(r$tpm, 1, r$genes_mean, FUN = "-")
+  r$genes_dist <- r$genes_mean
+  r$genes_dist_q <- arules::discretize(r$genes_dist, n.cat = 50)
+  r$sig_scores <- matrix(data = 0, nrow = ncol(r$tpm), ncol = length(gene_sign))
+  sig_names <- names(gene_sign)
+  colnames(r$sig_scores) <- sig_names
+  r$sig_scores_raw <- r$sig_scores
+  rand_flag <- is.null(r$rand_scores) | !all(is.element(names(gene_sign), colnames(r$rand_scores)))
+  if (rand_flag) {
+    # if (verbose) message("Computing also random scores...", "\n")
+    r$rand_scores <- r$sig_scores
   }
-  for (i in sig.names){
-    b.sign <- is.element(r$genes,gene.sign[[i]])
-    if(sum(b.sign) < 2){next()}
-    if(rand.flag){
-      rand.scores <- get_semi_random_OE(r,r$genes.dist.q,b.sign,num.rounds = num.rounds)
-    }else{
-      rand.scores <- r$rand.scores[,i]
+  for (i in sig_names) {
+    b_sign <- is.element(r$genes, gene_sign[[i]])
+    if (sum(b_sign) < 2) {
+      next()
     }
-    raw.scores <- colMeans(r$zscores[b.sign,])
-    final.scores <- raw.scores-rand.scores
-    r$sig.scores[,i] <- final.scores
-    r$sig.scores.raw[,i] <- raw.scores
-    r$rand.scores[,i] <- rand.scores
+    if (rand_flag) {
+      rand_scores <- get_semi_random_OE(r, r$genes_dist_q, b_sign, num_rounds = num_rounds)
+    } else {
+      rand_scores <- r$rand_scores[, i]
+    }
+    raw_scores <- colMeans(r$zscores[b_sign, ])
+    final_scores <- raw_scores - rand_scores
+    r$sig_scores[, i] <- final_scores
+    r$sig_scores_raw[, i] <- raw_scores
+    r$rand_scores[, i] <- rand_scores
   }
-  if(full.flag){return(r)}
-  sig.scores <- r$sig.scores
-  return(sig.scores)
+  if (full_flag) {
+    return(r)
+  }
+  sig_scores <- r$sig_scores
+  return(sig_scores)
 }

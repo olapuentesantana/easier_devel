@@ -2,34 +2,41 @@
 % Please edit documentation in R/compute_LR_pairs.R
 \name{compute_LR_pairs}
 \alias{compute_LR_pairs}
-\title{Compute ligand-receptor pairs}
+\title{Compute ligand-receptor pair weights from TPM bulk gene expression}
 \usage{
-compute_LR_pairs(
-  RNA.tpm,
-  remove.genes.ICB_proxies = FALSE,
-  compute.cytokines.pairs = FALSE,
-  cancertype
-)
+compute_LR_pairs(RNA_tpm, cancer_type = "pancan", verbose = TRUE)
 }
 \arguments{
-\item{RNA.tpm}{numeric matrix of tpm values with rows=genes and columns=samples}
+\item{RNA_tpm}{A data.frame containing TPM values with HGNC symbols in rows and samples in columns.}
 
-\item{remove.genes.ICB_proxies}{boolean variable to reomove all those genes involved in the computation of ICB proxy's of response}
+\item{cancer_type}{A string detailing the cancer type whose ligand-receptor pairs network will be used.
+A pan-cancer network is selected by default, whose network represents the union of all
+ligand-receptor pairs present across the 18 cancer types studied in (Lapuente-Santana et al., bioRxiv, 2021).}
 
-\item{compute.cytokines.pairs}{boolean variable to compute cytokine pairs as well}
-
-\item{cancertype}{string character}
+\item{verbose}{A logical value indicating whether to display messages about the number of ligand-receptor
+genes found in the gene expression data provided.}
 }
 \value{
-A list with the following elements:
-\describe{
-\item{LRpairs}{Ligand-leceptor pairs weights matrix in log2(tpm + 1) with rows=samples and columns = L-R pairs}
-\item{CYTOKINEpairs}{Cytokine-Cytokine pairs weights matrix in log2(tpm + 1) with rows=samples and columns = CYTOKINE pairs}
-}
+A matrix of weights with samples in rows and ligand-receptor pairs in columns.
 }
 \description{
-\code{compute_LR_pairs} obtain ligand-receptor pairs weights from tpm RNAseq data.
+This function quantifies ligand-receptor interactions in the tumor microenvironment from
+TPM bulk gene expression (Lapuente-Santana et al., bioRxiv, 2021), using prior knowledge
+coming from ligand-receptor pair annotations from the database of (Ramilowski et al., Nat Commun, 2015).
+Each ligand-receptor weight is defined as the minimum of the log2(TPM+1) expression of
+the ligand and the receptor.
 }
 \examples{
-# TODOTODO
+# Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+# Original processed data is available from IMvigor210CoreBiologies package.
+library("easierData")
+dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+
+# Computation of ligand-receptor pair weights
+lrpair_weights <- compute_LR_pairs(
+  RNA_tpm = RNA_tpm,
+  cancer_type = "pancan"
+)
+lrpair_weights[1:5, 1:5]
 }

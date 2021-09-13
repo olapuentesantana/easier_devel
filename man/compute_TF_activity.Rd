@@ -2,26 +2,32 @@
 % Please edit documentation in R/compute_TF_activity.R
 \name{compute_TF_activity}
 \alias{compute_TF_activity}
-\title{Compute transription factors activity}
+\title{Compute transcription factor activity from gene expression using DoRothEA}
 \usage{
-compute_TF_activity(RNA.tpm, remove.genes.ICB_proxies = FALSE)
+compute_TF_activity(RNA_tpm, verbose = TRUE)
 }
 \arguments{
-\item{RNA.tpm}{numeric matrix of tpm values with rows=genes and columns=samples}
+\item{RNA_tpm}{data.frame containing TPM values with HGNC symbols in rows and samples in columns.}
 
-\item{remove.genes.ICB_proxies}{boolean variable to reomove all those genes involved in the computation of ICB proxy's of response}
+\item{verbose}{logical value indicating whether to display messages about the number of regulated
+genes found in the gene expression data provided.}
 }
 \value{
-A list with the following elements:
-\describe{
-\item{scores}{TF activity matrix with rows=samples and columns=TFs}
-\item{transcripts_kept}{vector with available gene names}
-\item{transcripts_left}{vector with missing gene names}
-}
+A numeric matrix of activity scores with samples in rows and transcription factors in columns.
 }
 \description{
-\code{compute_TF_activity} infers transription factor activity from tpm RNAseq data.
+This function infers transcription factor activity from TPM bulk gene expression
+using DoRothEA method (Garcia-Alonso et al., Genome Res, 2019).
 }
 \examples{
-# TODOTODO
+# Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+# Original processed data is available from IMvigor210CoreBiologies package.
+library("easierData")
+dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+
+# Computation of TF activity (Garcia-Alonso et al., Genome Res, 2019)
+tf_activity <- compute_TF_activity(
+  RNA_tpm = RNA_tpm
+)
 }

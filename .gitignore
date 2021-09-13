@@ -1,4 +1,4 @@
-# Mac OS X files 
+# Mac OS X files
 .DS_Store
 
 # History files
@@ -13,12 +13,16 @@
 # R development files
 .Rbuildignore
 
-# Riaz data (not make it public)
-data/Riaz_data.rda
+# Mariathasan data)
+data/dataset_mariathasan.rda
 
 # Model optimization parameters (heavy data file)
 R/sysdata.rda
 
-# Description of example Riaz data (not make it public)
-R/allData_riaz.R
+# Model optimization parameters (heavy data file)
+inst/extdata/easierData.rda
+inst/extdata/Mariathasan2018_PDL1_treatment.rda
+
+# Results
+figures/*
 

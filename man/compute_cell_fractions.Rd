@@ -2,24 +2,30 @@
 % Please edit documentation in R/compute_cell_fractions.R
 \name{compute_cell_fractions}
 \alias{compute_cell_fractions}
-\title{Compute immune cell fractions}
+\title{Compute immune cell fractions from gene expression using quanTIseq}
 \usage{
-compute_cell_fractions(RNA.tpm)
+compute_cell_fractions(RNA_tpm, verbose = TRUE)
 }
 \arguments{
-\item{RNA.tpm}{numeric matrix of tpm values with rows=genes and columns=samples}
+\item{RNA_tpm}{data.frame containing TPM values with HGNC symbols in rows and samples in columns.}
+
+\item{verbose}{logical value indicating whether to display messages about the number of immune cell
+signature genes found in the gene expression data provided.}
 }
 \value{
-Cell fractions matrix: matrix of normalized enrichment scores with rows=samples and columns=TFs
+A numeric matrix of normalized enrichment scores with samples in rows and cell types in columns.
 }
 \description{
-\code{compute_cell_fractions} estimates cell fractions from bulk RNAseq data.
-}
-\details{
-Compute cell fractions from transcriptomics data.
-This function computes cell fractions from tpm RNAseq data using
-quanTIseq method
+This function estimates cell fractions from TPM bulk gene expression
+using quanTIseq method from (Finotello et al., Genome Med, 2019).
 }
 \examples{
-# TODOTODO
+# Load exemplary dataset (Mariathasan et al., Nature, 2018) from easierData.
+# Original processed data is available from IMvigor210CoreBiologies package.
+library("easierData")
+dataset_mariathasan <- easierData::get_Mariathasan2018_PDL1_treatment()
+RNA_tpm <- dataset_mariathasan@assays@data@listData[["tpm"]]
+
+# Computation of cell fractions (Finotello et al., Genome Med, 2019)
+cell_fractions <- compute_cell_fractions(RNA_tpm = RNA_tpm)
 }
