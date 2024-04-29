@@ -251,7 +251,7 @@ head(cell_fractions)
 
 By applying PROGENy [@HOLLAND2020194431; @Schubert2018] method to count data from RNA-seq, the activity of 14 signaling pathways can be inferred as in the chunk below. 
 ```{r, eval=TRUE}
-pathway_activities <- compute_pathway_activity(RNA_tpm = RNA_tpm,
+pathway_activities <- compute_pathway_activity(RNA_counts = RNA_counts,
                                                remove_sig_genes_immune_response = FALSE)
 head(pathway_activities)
 ```
@@ -259,7 +259,7 @@ The call above infers pathway activity as a linear transformation of gene expres
 
 By applying DoRothEA [@Garcia-Alonso01082019] method to TPM data from RNA-seq, the activity of 118 TFs can be inferred as follows:
 ```{r, eval=TRUE}
-tf_activities <- compute_TF_activity(RNA_tpm = RNA_tpm, regulon_net = "dorothea")
+tf_activities <- compute_TF_activity(RNA_tpm = RNA_tpm, regulon_net = "collectri")
 head(tf_activities[,1:5])
 ```
 

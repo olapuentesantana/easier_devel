@@ -13,9 +13,10 @@
 #' @import magrittr
 #' @importFrom stats na.exclude
 #' @importFrom dplyr filter
-#' @importFrom decoupleR get_collectri get_dorothea run_wmean
+#' @importFrom decoupleR get_collectri get_dorothea run_viper
 #' @importFrom tidyr pivot_wider
 #' @importFrom tibble column_to_rownames
+#' @importFrom easierData get_TCGA_mean_pancancer get_TCGA_sd_pancancer
 #'
 #' @param RNA_tpm data.frame containing TPM values with HGNC symbols
 #' in rows and samples in columns.
@@ -58,6 +59,10 @@ compute_TF_activity <- function(RNA_tpm = NULL,
   # Some checks
   if (is.null(RNA_tpm)) stop("TPM gene expression data not found")
   if (length(regulon_net) > 1) stop("Please select just one regulon network")
+  
+  # Retrieve internal data
+  TCGA_mean_pancancer <- suppressMessages(easierData::get_TCGA_mean_pancancer())
+  TCGA_sd_pancancer <- suppressMessages(easierData::get_TCGA_sd_pancancer())
 
   # Gene expression data
   tpm <- RNA_tpm
@@ -65,8 +70,14 @@ compute_TF_activity <- function(RNA_tpm = NULL,
 
   # HGNC symbols are required
   if (any(grep("ENSG00000", genes))) stop("hgnc gene symbols are required", call. = FALSE)
+  
+  # Log transformed expression matrix (log2[tpm+1]):
+  # expression matrix scaled and recentered.
+  gene_expr <- calc_z_score(t(tpm),
+                            mean = TCGA_mean_pancancer,
+                            sd = TCGA_sd_pancancer
+  )
 
-  gene_expr <- t(tpm)
   # redefine gene names to match TF-target network
   E <- t(gene_expr)
   newNames <- gsub(".", "-", rownames(E), fixed = TRUE)
@@ -81,8 +92,7 @@ compute_TF_activity <- function(RNA_tpm = NULL,
   }else if(regulon_net == "dorothea"){
     
     net <- decoupleR::get_dorothea(organism='human', 
-                                   levels = c("A", "B", "C"),
-                                   weight_dict = list(A = 1, B = 1, C = 1, D = 1))
+                                   levels = c("A", "B", "C"))
     
   }
 
@@ -105,16 +115,17 @@ compute_TF_activity <- function(RNA_tpm = NULL,
   E <- E[!is.na(apply(E, 1, sum)), ]
   E <- E[!is.infinite(apply(E, 1, sum)), ]
 
-  # TF activity: run wmean
-  tf_activity_df <- decoupleR::run_wmean(mat = E,
-                                         net = net,
+  # TF activity: run viper
+  tf_activity_df <- decoupleR::run_viper(mat = E,
+                                         network = net,
                                          .source='source',
                                          .target='target',
-                                         .mor='mor', 
-                                         minsize = 5)
+                                         .mor='mor',
+                                         minsize = 4,
+                                         eset.filter = FALSE,
+                                         method = "none")
   # To matrix
   tf_activity <- tf_activity_df %>%
-    dplyr::filter(statistic == "wmean") %>%
     tidyr::pivot_wider(id_cols = condition,
                        names_from = source,
                        values_from = score) %>%

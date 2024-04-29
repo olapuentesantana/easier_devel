@@ -62,7 +62,9 @@ Imports:
     ggrepel,
     magrittr,
     coin,
-    OmnipathR
+    OmnipathR,
+    DESeq2,
+    viper
 Suggests: 
     knitr, rmarkdown, BiocStyle, testthat, SummarizedExperiment
 biocViews: GeneExpression, Software, Transcription, SystemsBiology, Pathways, GeneSetEnrichment, ImmunoOncology, Epigenetics, Classification, BiomedicalInformatics, Regression, ExperimentHubSoftware

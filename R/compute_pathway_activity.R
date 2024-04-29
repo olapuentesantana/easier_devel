@@ -16,13 +16,14 @@
 #'
 #' @importFrom stats na.exclude
 #' @importFrom dplyr filter
-#' @importFrom progeny progeny getModel
-#' @importFrom decoupleR get_progeny run_wmean
+#' @importFrom DESeq2 DESeqDataSetFromMatrix estimateSizeFactors estimateDispersions
+#' getVarianceStabilizedData
+#' @importFrom decoupleR get_progeny run_wsum
 #' @importFrom tidyr pivot_wider
 #' @importFrom tibble column_to_rownames
 #' @importFrom easierData get_cor_scores_genes
 #'
-#' @param RNA_tpm data.frame containing TPM values with HGNC
+#' @param RNA_counts data.frame containing TPM values with HGNC
 #' gene symbols as row names and samples identifiers as column names.
 #' @param remove_sig_genes_immune_response logical value indicating
 #' whether to remove signature genes involved in the derivation of
@@ -61,7 +62,7 @@
 #'   RNA_counts = RNA_counts,
 #'   remove_sig_genes_immune_response = TRUE
 #' )
-compute_pathway_activity <- function(RNA_tpm = NULL,
+compute_pathway_activity <- function(RNA_counts = NULL,
                                      remove_sig_genes_immune_response = TRUE,
                                      verbose = TRUE) {
   # Some checks
@@ -71,17 +72,48 @@ compute_pathway_activity <- function(RNA_tpm = NULL,
   cor_scores_genes <- suppressMessages(easierData::get_cor_scores_genes())
 
   # Gene expression data
-  tpm <- RNA_tpm
-  genes <- rownames(tpm)
+  raw_counts <- RNA_counts
+  genes <- rownames(raw_counts)
   
   # HGNC symbols are required
   if (any(grep("ENSG00000", genes))) stop("hgnc gene symbols are required", call. = FALSE)
   
-  gene_expr <- t(tpm)
-  # redefine gene names to match TF-target network
-  E <- t(gene_expr)
-  newNames <- gsub(".", "-", rownames(E), fixed = TRUE)
-  rownames(E) <- newNames
+  # Remove list of genes used to build proxy's of ICB response
+  if (remove_sig_genes_immune_response) {
+    if (verbose) message("Removing signature genes of hallmarks of immune response \n")
+    idy <- stats::na.exclude(match(cor_scores_genes, rownames(raw_counts)))
+    raw_counts <- raw_counts[-idy, ]
+  }
+  
+  # Integers are required for "DESeq2"
+  if (is.integer(raw_counts) == FALSE) {
+    raw_counts_integer <- apply(raw_counts, 2, as.integer)
+    rownames(raw_counts_integer) <- rownames(raw_counts)
+  } else {
+    raw_counts_integer <- raw_counts
+  }
+  
+  # Variance stabilizing transformation (DESeq2 package)
+  # Integer count matrix, a data frame with the sample info,
+  # design =~1 to consider all samples as part of the same group.
+  
+  # Column data:
+  colData <- data.frame(id = colnames(raw_counts_integer))
+  
+  if (verbose) message("Gene counts normalization with DESeq2:")
+  # Construction a DESeqDataSet: (Forced all to be data.frames($ operator))
+  dset <- DESeq2::DESeqDataSetFromMatrix(
+    countData = raw_counts_integer,
+    colData = colData,
+    design = ~1
+  )
+  
+  # Variance stabilization transformation
+  dset <- DESeq2::estimateSizeFactors(dset)
+  dset <- DESeq2::estimateDispersions(dset)
+  gene_expr <- DESeq2::getVarianceStabilizedData(dset)
+  rownames(gene_expr) <- rownames(raw_counts_integer)
+  E <- gene_expr
   
   ## progeny network
   net <- decoupleR::get_progeny(organism = 'human', top = 100)
@@ -113,15 +145,14 @@ compute_pathway_activity <- function(RNA_tpm = NULL,
   E <- E[!is.infinite(apply(E, 1, sum)), ]
   
   # Pathway activity: run wmean
-  pathway_activity_df <- decoupleR::run_wmean(mat = E,
+  pathway_activity_df <- decoupleR::run_wsum(mat = E,
                                               net = net,
                                               .source='source',
                                               .target='target',
-                                              .mor='weight', 
-                                              minsize = 5)
+                                              .mor='weight')
   # To matrix
   pathway_activity <- pathway_activity_df %>%
-    dplyr::filter(statistic == "wmean") %>%
+    dplyr::filter(statistic == "wsum") %>%
     tidyr::pivot_wider(id_cols = condition,
                        names_from = source,
                        values_from = score) %>%

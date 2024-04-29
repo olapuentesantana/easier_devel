@@ -5,13 +5,13 @@
 \title{Compute pathway activity from gene expression using PROGENy}
 \usage{
 compute_pathway_activity(
-  RNA_tpm = NULL,
+  RNA_counts = NULL,
   remove_sig_genes_immune_response = TRUE,
   verbose = TRUE
 )
 }
 \arguments{
-\item{RNA_tpm}{data.frame containing TPM values with HGNC
+\item{RNA_counts}{data.frame containing TPM values with HGNC
 gene symbols as row names and samples identifiers as column names.}
 
 \item{remove_sig_genes_immune_response}{logical value indicating
