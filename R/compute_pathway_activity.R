@@ -66,7 +66,7 @@ compute_pathway_activity <- function(RNA_counts = NULL,
                                      remove_sig_genes_immune_response = TRUE,
                                      verbose = TRUE) {
   # Some checks
-  if (is.null(RNA_tpm)) stop("TPM gene expression data not found")
+  if (is.null(RNA_counts)) stop("Count gene expression data not found")
   
   # Retrieve internal data
   cor_scores_genes <- suppressMessages(easierData::get_cor_scores_genes())
