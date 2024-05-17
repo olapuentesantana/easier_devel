@@ -92,7 +92,7 @@ compute_TF_activity <- function(RNA_tpm = NULL,
   }else if(regulon_net == "dorothea"){
     
     net <- decoupleR::get_dorothea(organism='human', 
-                                   levels = c("A", "B", "C"))
+                                   levels = c("A", "B"))
     
   }
 
