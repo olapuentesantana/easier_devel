@@ -55,7 +55,8 @@
 #' )
 compute_TF_activity <- function(RNA_tpm = NULL,
                                 regulon_net = c("collectri", "dorothea"),
-                                verbose = TRUE) {
+                                verbose = TRUE,
+				tumor = TRUE) {
   # Some checks
   if (is.null(RNA_tpm)) stop("TPM gene expression data not found")
   if (length(regulon_net) > 1) stop("Please select just one regulon network")
@@ -73,10 +74,14 @@ compute_TF_activity <- function(RNA_tpm = NULL,
   
   # Log transformed expression matrix (log2[tpm+1]):
   # expression matrix scaled and recentered.
-  gene_expr <- calc_z_score(t(tpm),
-                            mean = TCGA_mean_pancancer,
-                            sd = TCGA_sd_pancancer
-  )
+  if(tumor){
+   gene_expr <- calc_z_score(t(tpm),
+                             mean = TCGA_mean_pancancer,
+                             sd = TCGA_sd_pancancer
+   )
+  }else{
+   gene_expr <- calc_z_score(t(tpm))
+  }
 
   # redefine gene names to match TF-target network
   E <- t(gene_expr)
