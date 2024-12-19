@@ -155,7 +155,7 @@ compute_scores_immune_response <- function(RNA_tpm = NULL,
           ))
 
           genes_to_annot <- easier_spec_sig[!easier_spec_sig %in% rownames(RNA_tpm)]
-          out_annot <- easier:::reannotate_genes(cur_genes = genes_to_annot)
+          out_annot <- reannotate_genes(cur_genes = genes_to_annot)
 
           # re-annotate gene signatures
           if (is.null(out_annot) == FALSE){
