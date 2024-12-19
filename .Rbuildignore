@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 # workflows
 ^\.github$
+^LICENSE\.md$
