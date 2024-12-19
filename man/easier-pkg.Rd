@@ -2,6 +2,8 @@
 % Please edit documentation in R/easier-pkg.R
 \docType{package}
 \name{easier-pkg}
+\alias{easier}
+\alias{easier-package}
 \alias{easier-pkg}
 \title{easier: predicting immune response
 by using quantitative descriptors of the
@@ -18,3 +20,16 @@ Peter A. J. Hilbers, Francesca Finotello, and Federica Eduati.
 Immune-Checkpoint Inhibitors.” Patterns, 100293.
 https://doi.org/10.1016/j.patter.2021.100293.
 }
+\author{
+\strong{Maintainer}: Oscar Lapuente-Santana \email{o.lapuente.santana@tue.nl} (\href{https://orcid.org/0000-0003-1995-8393}{ORCID})
+
+Authors:
+\itemize{
+  \item Federico Marini \email{marinif@uni-mainz.de} (\href{https://orcid.org/0000-0003-3252-7758}{ORCID})
+  \item Arsenij Ustjanzew \email{arsenij.ustjanzew@uni-mainz.de} (\href{https://orcid.org/0000-0002-1014-4521}{ORCID})
+  \item Francesca Finotello \email{francesca.finotello@i-med.ac.at} (\href{https://orcid.org/0000-0003-0712-4658}{ORCID})
+  \item Federica Eduati \email{f.eduati@tue.nl} (\href{https://orcid.org/0000-0002-7822-3867}{ORCID})
+}
+
+}
+\keyword{internal}

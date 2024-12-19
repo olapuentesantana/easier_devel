@@ -41,7 +41,7 @@ pat_subset <- c(
 RNA_tpm <- RNA_tpm[, colnames(RNA_tpm) \%in\% pat_subset]
 
 # Some genes are causing issues due to approved symbols matching more than one gene
-genes_info <- easier:::reannotate_genes(cur_genes = rownames(RNA_tpm))
+genes_info <- reannotate_genes(cur_genes = rownames(RNA_tpm))
 ## Remove non-approved symbols
 non_na <- !is.na(genes_info$new_names)
 RNA_tpm <- RNA_tpm[non_na, ]
