@@ -75,7 +75,7 @@
 #' r$zscores <- sweep(r$tpm, 1, r$genes_mean, FUN = "-")
 #'
 #' # Bin genes into 50 expression bins according to their average
-#' r$genes_dist_q <- discretize(r$genes_dist, n.cat = 50)
+#' r$genes_dist_q <- easier:::discretize(r$genes_dist, n_cat = 50)
 #'
 #' # Match genes from exc.down signature with genes from expression matrix
 #' b_sign <- is.element(r$genes, RIR_gene_signature[["exc.down"]])

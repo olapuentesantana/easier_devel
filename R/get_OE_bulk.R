@@ -67,7 +67,7 @@
 #' RIR_gene_signature <- score_signature_genes$RIR
 #'
 #' # Apply function to calculate OE:
-#' res_scores <- get_OE_bulk(r, gene_sign = RIR_gene_signature, verbose = TRUE)
+#' res_scores <- easier:::get_OE_bulk(r, gene_sign = RIR_gene_signature, verbose = TRUE)
 #' }
 get_OE_bulk <- function(r,
                         gene_sign = NULL,
