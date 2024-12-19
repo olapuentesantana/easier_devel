@@ -87,7 +87,7 @@ opt_xtrain_stats_cancer_view_spec <- lapply(view_name, function(X) {
 names(opt_xtrain_stats_cancer_view_spec) <- view_name
 
 # Predict using rmtlr
-prediction_view <- predict_with_rmtlr(
+prediction_view <- easier:::predict_with_rmtlr(
   view_name = view_name,
   view_info = view_info,
   view_data = view_data,

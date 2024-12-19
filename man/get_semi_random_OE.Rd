@@ -96,7 +96,7 @@ r$genes_dist_q <- easier:::discretize(r$genes_dist, n_cat = 50)
 b_sign <- is.element(r$genes, RIR_gene_signature[["exc.down"]])
 
 # Compute random score:
-rand_scores <- get_semi_random_OE(r, r$genes_dist_q, b_sign)
+rand_scores <- easier:::get_semi_random_OE(r, r$genes_dist_q, b_sign)
 }
 }
 \references{
