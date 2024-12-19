@@ -58,7 +58,7 @@ RIR_gene_signature <- score_signature_genes$RIR
 r$genes_dist <- r$genes_mean <- rowMeans(r$tpm)
 
 # Bin genes into 50 expression bins according to their average
-r$genes_dist_q <- discretize(r$genes_dist, n_cat = 50)
+r$genes_dist_q <- easier:::discretize(r$genes_dist, n_cat = 50)
 }
 }
 \references{

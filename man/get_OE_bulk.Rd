@@ -80,7 +80,7 @@ score_signature_genes <- suppressMessages(easierData::get_scores_signature_genes
 RIR_gene_signature <- score_signature_genes$RIR
 
 # Apply function to calculate OE:
-res_scores <- get_OE_bulk(r, gene_sign = RIR_gene_signature, verbose = TRUE)
+res_scores <- easier:::get_OE_bulk(r, gene_sign = RIR_gene_signature, verbose = TRUE)
 }
 }
 \references{
