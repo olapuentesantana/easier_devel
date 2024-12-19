@@ -13,6 +13,8 @@
 #'
 #' @return A numeric matrix with values as z-scores.
 #'
+#' @export
+#' 
 #' @examples
 #' \donttest{
 #' # using a SummarizedExperiment object
