@@ -60,7 +60,7 @@ colnames(estimated_parameters) <- c(
 )
 
 # Compute predictions using parameters values
-pred_test <- rmtlr_test(
+pred_test <- easier:::rmtlr_test(
   x_test = tf_activities,
   coef_matrix = estimated_parameters
 )
